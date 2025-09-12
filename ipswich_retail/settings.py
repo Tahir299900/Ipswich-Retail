@@ -133,6 +133,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 # Session configuration for cart
 SESSION_COOKIE_AGE = 86400  # 24 hours
+CART_SESSION_ID = 'cart'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
