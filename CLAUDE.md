@@ -1,0 +1,1 @@
+- Never mention about the Co Authored by the Claude code in the git commits
