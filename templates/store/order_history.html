@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Order History - Ipswich Retail{% endblock %}
+
+{% block content %}
+<h1><i class="bi bi-clock-history"></i> Order History</h1>
+
+{% if orders %}
+    <div class="row">
+        {% for order in orders %}
+            <div class="col-md-12 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-2">
+                                <strong>Order {{ order.order_id }}</strong>
+                                <br>
+                                <small class="text-muted">{{ order.created_at|date:"M d, Y" }}</small>
+                            </div>
+                            <div class="col-md-3">
+                                <span class="badge bg-{% if order.status == 'delivered' %}success{% elif order.status == 'shipped' %}info{% elif order.status == 'processing' %}warning{% elif order.status == 'cancelled' %}danger{% else %}secondary{% endif %}">
+                                    {{ order.get_status_display }}
+                                </span>
+                            </div>
+                            <div class="col-md-3">
+                                <strong>${{ order.total_cost }}</strong>
+                                <br>
+                                <small class="text-muted">{{ order.items.count }} item{{ order.items.count|pluralize }}</small>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <a href="{% url 'store:order_detail' order.order_id %}" 
+                                   class="btn btn-outline-primary btn-sm">
+                                    View Details
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <hr class="my-2">
+                        
+                        <div class="d-flex flex-wrap">
+                            {% for item in order.items.all|slice:":3" %}
+                                <small class="me-3 text-muted">{{ item.product.name }} x{{ item.quantity }}</small>
+                            {% endfor %}
+                            {% if order.items.count > 3 %}
+                                <small class="text-muted">and {{ order.items.count|add:"-3" }} more...</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+    {% comment %} Pagination could be added here if needed {% endcomment %}
+{% else %}
+    <div class="text-center py-5">
+        <i class="bi bi-bag-x text-muted" style="font-size: 4rem;"></i>
+        <h3 class="mt-3">No orders yet</h3>
+        <p class="text-muted">Start shopping to see your orders here!</p>
+        <a href="{% url 'store:product_list' %}" class="btn btn-primary">
+            <i class="bi bi-shop"></i> Start Shopping
+        </a>
+    </div>
+{% endif %}
+{% endblock %}
