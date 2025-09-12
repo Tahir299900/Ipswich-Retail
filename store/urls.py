@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .health import health_check, readiness_check
 
 app_name = 'store'
 
@@ -13,4 +14,7 @@ urlpatterns = [
     path('checkout/', views.checkout, name='checkout'),
     path('order/<str:order_id>/', views.order_detail, name='order_detail'),
     path('orders/', views.order_history, name='order_history'),
+    # Health check endpoints
+    path('health/', health_check, name='health_check'),
+    path('ready/', readiness_check, name='readiness_check'),
 ]
