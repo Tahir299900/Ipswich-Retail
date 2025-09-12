@@ -1,0 +1,40 @@
+# Prometheus configuration for Ipswich Retail monitoring
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []
+
+rule_files: []
+
+scrape_configs:
+  # Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Django application
+  - job_name: 'ipswich-retail'
+    static_configs:
+      - targets: ['web:8000']
+    metrics_path: '/health/'
+    scrape_interval: 30s
+    scrape_timeout: 10s
+    
+  # PostgreSQL database
+  - job_name: 'postgresql'
+    static_configs:
+      - targets: ['db:5432']
+    
+  # Redis cache
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis:6379']
+
+  # Node exporter for system metrics (if available)
+  - job_name: 'node'
+    static_configs:
+      - targets: ['node-exporter:9100']

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "DOCKERFILE",
+    "dockerfilePath": "Dockerfile"
+  },
+  "deploy": {
+    "numReplicas": 1,
+    "sleepApplication": false,
+    "restartPolicyType": "ON_FAILURE"
+  },
+  "environments": {
+    "production": {
+      "variables": {
+        "DJANGO_SETTINGS_MODULE": "ipswich_retail.settings",
+        "PORT": "8000",
+        "PYTHONUNBUFFERED": "1",
+        "DEBUG": "False"
+      }
+    }
+  },
+  "plugins": [
+    {
+      "name": "postgresql",
+      "config": {
+        "POSTGRES_DB": "ipswich_retail",
+        "POSTGRES_USER": "postgres"
+      }
+    },
+    {
+      "name": "redis",
+      "config": {}
+    }
+  ]
+}
