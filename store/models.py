@@ -22,6 +22,10 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse('store:category_detail', kwargs={'slug': self.slug})
 
+    def get_related_categories(self):
+        """Return other categories excluding this one"""
+        return Category.objects.exclude(id=self.id)[:4]
+
 class Product(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
