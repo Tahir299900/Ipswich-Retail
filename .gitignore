@@ -30,3 +30,6 @@ build/
 
 # Docker
 docker-compose.override.ymlvenv/
+
+venv/
+assessment_file.pdf
