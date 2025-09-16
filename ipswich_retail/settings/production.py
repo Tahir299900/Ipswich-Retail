@@ -4,10 +4,9 @@ Production settings for Ipswich Retail
 import os
 import dj_database_url
 from pathlib import Path
-import os
-import dj_database_url
+from .base import *
 
-# Build paths inside the project
+# Build paths inside the project - override from base
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Security Settings
