@@ -3,8 +3,8 @@
 set -o errexit
 
 # Install Python dependencies
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
+pip install --upgrade pip
+pip install -r requirements.txt
 
 # Collect static files
 python manage.py collectstatic --no-input
