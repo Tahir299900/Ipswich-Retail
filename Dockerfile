@@ -26,7 +26,8 @@ FROM python:3.12-slim as production
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PATH="/root/.local/bin:$PATH"
+    PATH="/root/.local/bin:$PATH" \
+    DJANGO_SETTINGS_MODULE="ipswich_retail.settings.production"
 
 # Install system dependencies for production
 RUN apt-get update && apt-get install -y \
