@@ -54,15 +54,12 @@ RUN python manage.py collectstatic --noinput
 # Change ownership of the app directory to appuser
 RUN chown -R appuser:appuser /app
 
-# Switch to non-root user
-USER appuser
-
 # Expose port
 EXPOSE 8000
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
-    CMD python -c "import requests; requests.get('http://localhost:8000/', timeout=10)"
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/', timeout=10)"
 
 # Command to run the application
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "ipswich_retail.wsgi:application"]
+CMD ["sh", "-c", "python manage.py runserver 0.0.0.0:${PORT:-8000}"]
