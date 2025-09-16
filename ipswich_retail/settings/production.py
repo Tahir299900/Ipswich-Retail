@@ -44,7 +44,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Security Headers
-SECURE_SSL_REDIRECT = True
+# Disable SSL redirect for Render (handles SSL termination at proxy level)
+SECURE_SSL_REDIRECT = False
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True
