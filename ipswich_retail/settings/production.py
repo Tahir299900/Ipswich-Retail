@@ -27,7 +27,11 @@ if RENDER_EXTERNAL_HOSTNAME:
 
 # Database Configuration - Use PostgreSQL in production
 DATABASE_URL = os.environ.get('DATABASE_URL')
+print(f"[STARTUP] DATABASE_URL configured: {bool(DATABASE_URL)}")
+print(f"[STARTUP] Database URL value: {DATABASE_URL[:50] if DATABASE_URL else 'Not set'}...")
+
 if DATABASE_URL:
+    print("[STARTUP] Using PostgreSQL database")
     DATABASES = {
         'default': dj_database_url.config(
             default=DATABASE_URL,
@@ -36,6 +40,7 @@ if DATABASE_URL:
         )
     }
 else:
+    print("[STARTUP] WARNING: Using SQLite fallback - DATABASE_URL not set!")
     # Fallback to SQLite for initial deployment
     DATABASES = {
         'default': {
