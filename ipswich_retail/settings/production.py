@@ -58,6 +58,10 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# Ensure media directory exists
+import os
+os.makedirs(MEDIA_ROOT, exist_ok=True)
+
 # Security Headers
 # Disable SSL redirect for Render (handles SSL termination at proxy level)
 SECURE_SSL_REDIRECT = False

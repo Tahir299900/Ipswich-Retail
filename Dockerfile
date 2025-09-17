@@ -46,8 +46,9 @@ COPY --from=builder /root/.local /root/.local
 # Copy project files
 COPY . .
 
-# Create media and static directories
-RUN mkdir -p /app/media /app/staticfiles
+# Create media and static directories with proper permissions
+RUN mkdir -p /app/media /app/staticfiles && \
+    chmod 755 /app/media /app/staticfiles
 
 # Collect static files
 RUN python manage.py collectstatic --noinput
