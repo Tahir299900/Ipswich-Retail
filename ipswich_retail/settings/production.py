@@ -61,8 +61,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Security Headers
 # Disable SSL redirect for Render (handles SSL termination at proxy level)
 SECURE_SSL_REDIRECT = False
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = False  # Disabled for Render
+CSRF_COOKIE_SECURE = False  # Disabled for Render
+CSRF_TRUSTED_ORIGINS = ['https://ipswich-retail.onrender.com']
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
