@@ -14,6 +14,7 @@ urlpatterns = [
     path('checkout/', views.checkout, name='checkout'),
     path('order/<str:order_id>/', views.order_detail, name='order_detail'),
     path('orders/', views.order_history, name='order_history'),
+    path('register/', views.register, name='register'),
     # Health check endpoints
     path('health/', health_check, name='health_check'),
     path('ready/', readiness_check, name='readiness_check'),
